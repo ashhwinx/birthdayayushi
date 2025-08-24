@@ -34,7 +34,7 @@ const UnlockSection: React.FC<UnlockSectionProps> = ({ onUnlock }) => {
 
   const handlePasswordSubmit = () => {
     // Accept various anniversary-related answers
-    const correctAnswers = ['august 25', '25 august', '25/08', '08/25', 'our anniversary', 'first date'];
+    const correctAnswers = ["batman","Batman"];
     if (correctAnswers.some(answer => password.toLowerCase().includes(answer))) {
       onUnlock();
     } else {
