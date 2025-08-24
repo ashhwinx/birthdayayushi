@@ -1,0 +1,371 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --cream: #fdf6e3;
+  --beige: #e8d5c4;
+  --warm-brown: #6b4226;
+  --warm-brown-dark: #4a2c1a;
+  --warm-brown-light: #8b6748;
+  --soft-gold: #d4af37;
+}
+
+/* Font Classes */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-dancing {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Custom Components */
+@layer components {
+  /* Buttons */
+  .primary-btn {
+    @apply px-8 py-3 bg-cream border-2 border-warm-brown text-warm-brown font-poppins font-medium rounded-lg hover:bg-beige hover:shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-warm-brown/50;
+  }
+
+  .open-capsule-btn {
+    @apply px-12 py-4 bg-cream border-2 border-warm-brown text-warm-brown font-poppins font-semibold text-lg rounded-xl hover:bg-beige hover:shadow-2xl transition-all duration-500 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-warm-brown/50 animate-fade-in-delayed glow-on-hover;
+  }
+
+  .unlock-method-btn {
+    @apply flex items-center gap-2 px-6 py-3 bg-cream/80 border-2 border-warm-brown/30 text-warm-brown font-poppins rounded-lg hover:bg-beige hover:border-warm-brown transition-all duration-300;
+  }
+
+  .unlock-method-btn.active {
+    @apply bg-warm-brown text-cream border-warm-brown;
+  }
+
+  .download-btn {
+    @apply flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-warm-brown to-warm-brown-light text-cream font-poppins font-semibold rounded-xl hover:from-warm-brown-dark hover:to-warm-brown hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+  }
+
+  /* Envelope Animations */
+  .envelope-container {
+    @apply relative flex justify-center items-center;
+  }
+
+  .envelope-glow {
+    @apply relative;
+    animation: gentle-glow 3s ease-in-out infinite alternate;
+  }
+
+  .envelope {
+    @apply relative w-24 h-16 cursor-pointer transition-transform duration-300 hover:animate-shake;
+  }
+
+  .envelope-back {
+    @apply absolute inset-0 bg-warm-brown rounded-sm transform rotate-0;
+  }
+
+  .envelope-front {
+    @apply absolute inset-0 bg-beige rounded-sm;
+  }
+
+  .envelope-flap {
+    @apply absolute top-0 left-0 right-0 h-8 bg-warm-brown-light rounded-sm transform-gpu origin-top;
+    clip-path: polygon(0 0, 50% 70%, 100% 0);
+  }
+
+  .heart-icon {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-cream;
+  }
+
+  /* Locked Envelope */
+  .locked-envelope {
+    @apply relative flex justify-center items-center mb-8;
+  }
+
+  .envelope-large {
+    @apply relative w-32 h-20;
+  }
+
+  .envelope-back-large {
+    @apply absolute inset-0 bg-warm-brown rounded-md;
+  }
+
+  .envelope-front-large {
+    @apply absolute inset-0 bg-beige rounded-md;
+  }
+
+  .envelope-flap-large {
+    @apply absolute top-0 left-0 right-0 h-10 bg-warm-brown-light rounded-md;
+    clip-path: polygon(0 0, 50% 70%, 100% 0);
+  }
+
+  .lock-icon {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-cream;
+  }
+
+  /* Opened Envelope */
+  .envelope-opening {
+    @apply relative flex justify-center items-center;
+  }
+
+  .opened-envelope {
+    @apply relative w-32 h-20;
+  }
+
+  .envelope-back-opened {
+    @apply absolute inset-0 bg-warm-brown rounded-md;
+  }
+
+  .envelope-front-opened {
+    @apply absolute inset-0 bg-beige rounded-md;
+  }
+
+  .envelope-flap-opened {
+    @apply absolute top-0 left-0 right-0 h-10 bg-warm-brown-light rounded-md transform -rotate-12 origin-top-left;
+    clip-path: polygon(0 0, 50% 70%, 100% 0);
+    animation: envelope-open 2s ease-in-out;
+  }
+
+  /* Letter Styling */
+  .letter-container {
+    @apply relative max-w-3xl mx-auto;
+  }
+
+  .parchment-paper {
+    @apply relative bg-cream border-4 border-warm-brown/20 rounded-xl shadow-2xl p-8 md:p-12;
+    background-image: 
+      radial-gradient(circle at 100% 50%, transparent 20px, rgba(255,255,255,0.3) 21px, rgba(255,255,255,0.3) 30px, transparent 31px),
+      linear-gradient(0deg, transparent 24px, rgba(107, 66, 38, 0.1) 25px, rgba(107, 66, 38, 0.1) 26px, transparent 27px, transparent 74px, rgba(107, 66, 38, 0.1) 75px, rgba(107, 66, 38, 0.1) 76px, transparent 77px);
+    background-size: 30px 30px, 30px 100px;
+  }
+
+  .letter-content {
+    @apply relative z-10;
+  }
+
+  .letter-text p {
+    @apply text-base md:text-lg mb-4;
+  }
+
+  /* Easter Eggs */
+  .easter-egg-heart {
+    @apply transition-all duration-300 hover:animate-bounce focus:outline-none;
+  }
+
+  .easter-egg-heart.revealed {
+    animation: heart-pop 0.6s ease-out;
+  }
+
+  /* Countdown Display */
+  .countdown-display {
+    @apply text-4xl md:text-5xl font-playfair font-bold text-warm-brown bg-cream/80 border-2 border-warm-brown/30 rounded-xl p-6 mx-auto max-w-md;
+  }
+
+  /* Puzzle */
+  .puzzle-piece {
+    @apply aspect-square bg-beige border-2 border-warm-brown/30 rounded-lg cursor-pointer hover:bg-warm-brown/10 transition-all duration-300 flex items-center justify-center;
+  }
+
+  .puzzle-piece-inner {
+    @apply font-poppins font-bold text-warm-brown text-xl;
+  }
+
+  /* Final Message */
+  .final-message-container {
+    @apply relative;
+  }
+
+  .next-capsule-countdown {
+    @apply mt-12 p-4 bg-warm-brown/5 rounded-lg border border-warm-brown/20;
+  }
+}
+
+/* Custom Animations */
+@keyframes gentle-glow {
+  0% { 
+    filter: drop-shadow(0 0 5px rgba(107, 66, 38, 0.3)); 
+  }
+  100% { 
+    filter: drop-shadow(0 0 20px rgba(107, 66, 38, 0.6)); 
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes floating-heart-bg {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes envelope-open {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(-12deg);
+  }
+}
+
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Utility Classes */
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-float-up {
+  animation: float-up linear forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+.animate-fade-in-delayed {
+  animation: fade-in 1s ease-out 0.5s both;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 1.5s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 25px rgba(107, 66, 38, 0.4);
+}
+
+.floating-heart-bg {
+  animation: floating-heart-bg 4s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--warm-brown);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--warm-brown-dark);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .parchment-paper {
+    @apply p-6;
+  }
+  
+  .letter-text p {
+    @apply text-sm;
+  }
+  
+  .countdown-display {
+    @apply text-2xl p-4;
+  }
+  
+  .envelope {
+    @apply w-20 h-14;
+  }
+  
+  .envelope-large {
+    @apply w-28 h-[4.5rem];
+  }
+}
