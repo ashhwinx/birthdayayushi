@@ -39,9 +39,7 @@ const FinalMessageSection: React.FC = () => {
         </div>
 
         {/* Optional: Small signature or ending decoration */}
-        <div className="pt-12 opacity-60">
-           <span className="font-poppins text-sm tracking-[0.3em] text-[#9D5C6E] uppercase">Forever Yours</span>
-        </div>
+       
 
       </div>
 
