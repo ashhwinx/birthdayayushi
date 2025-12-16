@@ -24,12 +24,10 @@ const LandingSection: React.FC<LandingSectionProps> = ({ onOpenCapsule }) => {
         {/* Main Text */}
         <div className="space-y-6 animate-fade-in-up">
           <h1 className="text-5xl md:text-6xl font-playfair font-bold text-warm-brown mb-6">
-          This year's highlight. Definitely YOU 🤌
+          For My favorite person❤
           </h1>
           
-          <p className="text-lg md:text-xl text-warm-brown-dark font-poppins leading-relaxed max-w-lg mx-auto">
-          Don't even know where to start this from but just want to take a moment to thankyou for being MY YOU. 🫶
-          </p>
+       
         </div>
 
         {/* Open Button */}

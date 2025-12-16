@@ -10,6 +10,11 @@
   --warm-brown-dark: #4a2c1a;
   --warm-brown-light: #8b6748;
   --soft-gold: #d4af37;
+  
+  /* New Pink Envelope Colors */
+  --rose-dark: #9D5C6E;
+  --rose-medium: #B0697D;
+  --rose-light: #C27B8E;
 }
 
 /* Font Classes */
@@ -48,7 +53,8 @@
     @apply flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-warm-brown to-warm-brown-light text-cream font-poppins font-semibold rounded-xl hover:from-warm-brown-dark hover:to-warm-brown hover:shadow-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
   }
 
-  /* Envelope Animations */
+  /* --- ENVELOPE STYLES (UPDATED TO PINK) --- */
+  
   .envelope-container {
     @apply relative flex justify-center items-center;
   }
@@ -58,28 +64,34 @@
     animation: gentle-glow 3s ease-in-out infinite alternate;
   }
 
+  /* Small Envelope */
   .envelope {
     @apply relative w-24 h-16 cursor-pointer transition-transform duration-300 hover:animate-shake;
   }
 
   .envelope-back {
-    @apply absolute inset-0 bg-warm-brown rounded-sm transform rotate-0;
+    @apply absolute inset-0 rounded-sm transform rotate-0;
+    background-color: var(--rose-dark); /* Dark Pink */
   }
 
   .envelope-front {
-    @apply absolute inset-0 bg-beige rounded-sm;
+    @apply absolute inset-0 rounded-sm;
+    background-color: var(--rose-light); /* Light Pink */
+    clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%); /* Pocket Shape */
   }
 
   .envelope-flap {
-    @apply absolute top-0 left-0 right-0 h-8 bg-warm-brown-light rounded-sm transform-gpu origin-top;
+    @apply absolute top-0 left-0 right-0 h-8 rounded-sm transform-gpu origin-top;
+    background-color: var(--rose-medium); /* Medium Pink */
     clip-path: polygon(0 0, 50% 70%, 100% 0);
   }
 
   .heart-icon {
     @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-cream;
+    margin-top: 4px; /* Slight adjustment for flap */
   }
 
-  /* Locked Envelope */
+  /* Locked Envelope (Large) */
   .locked-envelope {
     @apply relative flex justify-center items-center mb-8;
   }
@@ -89,20 +101,25 @@
   }
 
   .envelope-back-large {
-    @apply absolute inset-0 bg-warm-brown rounded-md;
+    @apply absolute inset-0 rounded-md;
+    background-color: var(--rose-dark); /* Dark Pink */
   }
 
   .envelope-front-large {
-    @apply absolute inset-0 bg-beige rounded-md;
+    @apply absolute inset-0 rounded-md;
+    background-color: var(--rose-light); /* Light Pink */
+    clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%); /* Pocket Shape */
   }
 
   .envelope-flap-large {
-    @apply absolute top-0 left-0 right-0 h-10 bg-warm-brown-light rounded-md;
+    @apply absolute top-0 left-0 right-0 h-10 rounded-md;
+    background-color: var(--rose-medium); /* Medium Pink */
     clip-path: polygon(0 0, 50% 70%, 100% 0);
   }
 
   .lock-icon {
     @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-cream;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
   }
 
   /* Opened Envelope */
@@ -115,15 +132,19 @@
   }
 
   .envelope-back-opened {
-    @apply absolute inset-0 bg-warm-brown rounded-md;
+    @apply absolute inset-0 rounded-md;
+    background-color: var(--rose-dark); /* Dark Pink */
   }
 
   .envelope-front-opened {
-    @apply absolute inset-0 bg-beige rounded-md;
+    @apply absolute inset-0 rounded-md;
+    background-color: var(--rose-light); /* Light Pink */
+    clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%);
   }
 
   .envelope-flap-opened {
-    @apply absolute top-0 left-0 right-0 h-10 bg-warm-brown-light rounded-md transform -rotate-12 origin-top-left;
+    @apply absolute top-0 left-0 right-0 h-10 rounded-md transform -rotate-12 origin-top-left;
+    background-color: var(--rose-medium); /* Medium Pink */
     clip-path: polygon(0 0, 50% 70%, 100% 0);
     animation: envelope-open 2s ease-in-out;
   }
@@ -185,10 +206,10 @@
 /* Custom Animations */
 @keyframes gentle-glow {
   0% { 
-    filter: drop-shadow(0 0 5px rgba(107, 66, 38, 0.3)); 
+    filter: drop-shadow(0 0 5px rgba(157, 92, 110, 0.3)); 
   }
   100% { 
-    filter: drop-shadow(0 0 20px rgba(107, 66, 38, 0.6)); 
+    filter: drop-shadow(0 0 20px rgba(157, 92, 110, 0.6)); 
   }
 }
 

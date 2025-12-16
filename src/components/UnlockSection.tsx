@@ -34,7 +34,7 @@ const UnlockSection: React.FC<UnlockSectionProps> = ({ onUnlock }) => {
 
   const handlePasswordSubmit = () => {
     // Accept various anniversary-related answers
-    const correctAnswers = ["batman","Batman"];
+    const correctAnswers = ["Sorry","sorry"];
     if (correctAnswers.some(answer => password.toLowerCase().includes(answer))) {
       onUnlock();
     } else {
@@ -85,20 +85,14 @@ const UnlockSection: React.FC<UnlockSectionProps> = ({ onUnlock }) => {
             <span>Solve Me</span>
           </button>
           
-          <button
-            onClick={() => setSelectedMethod('countdown')}
-            className={`unlock-method-btn ${selectedMethod === 'countdown' ? 'active' : ''}`}
-          >
-            <Clock size={20} />
-            <span>Time Capsule</span>
-          </button>
         </div>
 
         {/* Unlock Methods */}
         {selectedMethod === 'password' && (
           <div className="space-y-6 animate-fade-in">
             <p className="text-lg text-warm-brown-dark font-poppins mb-4">
-            Without you I don’t exist, with you I brighten the world...who am I ? ✨
+            Ive felt it inside but stayed quite because i guess i dont deserve it. 
+What word is it.
             </p>
             <div className="space-y-4">
               <input
