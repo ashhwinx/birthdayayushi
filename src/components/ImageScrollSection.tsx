@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heart } from 'lucide-react'; // Ensure you have lucide-react installed
+import { motion } from 'framer-motion';
+import { Heart } from 'lucide-react';
 
 const ImageScrollSection: React.FC = () => {
   const images = [
@@ -8,66 +9,56 @@ const ImageScrollSection: React.FC = () => {
     "/m3.jpeg",
     "/m4.jpeg",
     "/m5.jpeg",
-   
   ];
 
   return (
-    // Main Container with Pink Gradient
-    <div className="relative w-full py-20 overflow-hidden select-none ">
+    <div className="relative w-full min-h-screen py-20  overflow-hidden">
       
-      {/* --- Background Decorative Blobs (Soft Pink Glows) --- */}
-      <div className="absolute top-10 left-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-rose-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+      {/* --- Background Decorations --- */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#eecfd6_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
+      
+      {/* Soft Blobs */}
+      <div className="absolute top-20 left-[-100px] w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob"></div>
+      <div className="absolute bottom-40 right-[-100px] w-96 h-96 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-2000"></div>
 
-      {/* --- Header Section --- */}
-      <div className="relative z-10 text-center mb-12 px-4">
-      
-        <h2 className="font-dancing text-4xl md:text-5xl text-[#9D5C6E] mt-2 font-bold drop-shadow-sm">
-        Finally we have few photos together. <span className="text-rose-400">💕</span>
-        </h2>
+      {/* --- Header --- */}
+      <div className="relative z-10 text-center mb-16 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          
+          <h2 className="font-dancing text-4xl md:text-6xl text-[#9D5C6E] font-bold drop-shadow-sm leading-tight">
+            Finally we have few<br/> photos together <span className="text-rose-400">💕</span>
+          </h2>
+        </motion.div>
       </div>
 
-      {/* --- Marquee Container --- */}
-      <div className="relative w-full flex mask-linear-fade z-10 py-4">
+      {/* --- Timeline Container --- */}
+      <div className="relative max-w-5xl mx-auto px-4 md:px-0">
         
-        {/* Track 1 */}
-        <div className="flex animate-scroll whitespace-nowrap">
+        {/* Central Vertical Line (Visible on Desktop) */}
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-rose-300 to-transparent transform md:-translate-x-1/2 rounded-full hidden md:block"></div>
+
+        {/* Images Loop */}
+        <div className="flex flex-col gap-12 md:gap-24 pb-20">
           {images.map((img, index) => (
-            <ImageCard key={`a-${index}`} src={img} index={index} />
+            <TimelineItem key={index} src={img} index={index} />
           ))}
         </div>
 
-        {/* Track 2 */}
-        <div className="flex animate-scroll whitespace-nowrap">
-          {images.map((img, index) => (
-            <ImageCard key={`b-${index}`} src={img} index={index} />
-          ))}
+        {/* End Heart */}
+        <div className="flex justify-center mt-8 md:mt-0 relative z-10">
+           <div className="bg-white p-3 rounded-full shadow-lg border-2 border-pink-100 animate-bounce">
+             <Heart className="text-[#9D5C6E] fill-[#9D5C6E]" size={24} />
+           </div>
         </div>
 
       </div>
 
-      {/* --- CSS Styles --- */}
+      {/* --- Styles --- */}
       <style>{`
-        .animate-scroll {
-          animation: scroll 35s linear infinite;
-          display: flex;
-          min-width: 100%;
-        }
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-100%); }
-        }
-        
-        /* Fade Effect on Sides */
-        .mask-linear-fade {
-          mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-        }
-
-        /* Blob Animation */
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
@@ -85,42 +76,60 @@ const ImageScrollSection: React.FC = () => {
   );
 };
 
-// --- Updated Aesthetic Image Card ---
-const ImageCard = ({ src, index }: { src: string, index: number }) => (
-  <div className={`
-    relative w-[280px] md:w-[350px] mx-6 shrink-0 group perspective-1000
-    ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'} 
-    hover:rotate-0 transition-all duration-500
-  `}>
-    
-    {/* Card Frame (Polaroid Look) */}
-    <div className="
-      bg-white p-3 pb-12 rounded-lg 
-      shadow-[0_10px_30px_-10px_rgba(255,105,180,0.4)] 
-      group-hover:shadow-[0_20px_40px_-10px_rgba(255,105,180,0.6)]
-      transition-all duration-500 transform group-hover:-translate-y-2
-      border border-pink-100
-    ">
-      
-      {/* Image Container */}
-      <div className="relative w-full h-[320px] md:h-[400px] overflow-hidden rounded-md">
-        <img 
-          src={src} 
-          alt="Memory" 
-          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-        />
-        
-        {/* Pink Overlay Gradient on Hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-rose-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
+// --- Single Timeline Item Component ---
+const TimelineItem = ({ src, index }: { src: string, index: number }) => {
+  // Logic: Even index = Left side, Odd index = Right side
+  const isEven = index % 2 === 0;
 
-      {/* Decorative Heart Icon at bottom of Polaroid */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-        <Heart size={20} className="text-rose-400 fill-rose-200" />
+  return (
+    <div className={`flex flex-col md:flex-row items-center w-full ${isEven ? 'md:flex-row-reverse' : ''}`}>
+      
+      {/* 1. Empty Space (For Desktop Alignment) */}
+      <div className="hidden md:block w-1/2"></div>
+
+      {/* 2. Timeline Dot (Center Point) */}
+      <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-[#9D5C6E] rounded-full border-4 border-white shadow-md transform md:-translate-x-1/2 z-20 hidden md:block"></div>
+
+      {/* 3. The Content (Polaroid) */}
+      <div className="w-full md:w-1/2 flex justify-center md:block px-4 md:px-12">
+        <motion.div
+          // Animation Logic:
+          // Mobile: Always comes from bottom-up or slight fade
+          // Desktop: Even comes from Left (-x), Odd comes from Right (+x)
+          initial={{ opacity: 0, x: isEven ? -100 : 100, rotate: isEven ? -5 : 5 }}
+          whileInView={{ opacity: 1, x: 0, rotate: isEven ? -2 : 2 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+          className="relative group"
+        >
+          {/* Polaroid Frame */}
+          <div className="bg-white p-3 pb-12 rounded-sm shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] transform transition-transform duration-500 hover:scale-105 hover:z-30 hover:shadow-2xl border border-gray-100">
+            
+            {/* Image Wrapper */}
+            <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
+              <img 
+                src={src} 
+                alt="Memory" 
+                className="w-full h-full object-cover filter sepia-[0.1] hover:sepia-0 transition-all duration-500"
+              />
+              {/* Shine Effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            {/* Bottom Heart/Decoration */}
+            <div className="absolute bottom-3 left-0 right-0 text-center">
+              <Heart size={18} className="inline-block text-rose-300 fill-rose-100/50" />
+            </div>
+
+            {/* Tape Effect (Optional Aesthetic Detail) */}
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/30 backdrop-blur-sm border border-white/40 shadow-sm rotate-2 z-10 opacity-80"></div>
+
+          </div>
+        </motion.div>
       </div>
 
     </div>
-  </div>
-);
+  );
+};
 
 export default ImageScrollSection;

@@ -3,10 +3,11 @@ import LandingSection from './components/LandingSection';
 import UnlockSection from './components/UnlockSection';
 import LetterRevealSection from './components/LetterRevealSection';
 import EasterEggsSection from './components/EasterEggsSection';
-import FuturePromiseSection from './components/FuturePromiseSection';
+import FuturePromiseSection from './components/FuturePromiseSection'; // Agar ye last m rakhna ho to
 import FloatingHearts from './components/FloatingHearts';
 import BirthdayCake from './components/BirthdayCake';
-import ImageScrollSection from './components/ImageScrollSection'; // Naya component import
+import ImageScrollSection from './components/ImageScrollSection';
+import FinalMessageSection from './components/FinalMessageSection'; // Naya Page Import kiya
 import { ArrowRight } from 'lucide-react';
 
 function App() {
@@ -14,69 +15,62 @@ function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
 
-  // Jab letter section khule tab hearts dikhana shuru karein
+  // Letter section aate hi hearts udna shuru honge
   useEffect(() => {
     if (currentSection === 'letter') {
       setShowHearts(true);
     }
   }, [currentSection]);
 
-  // --- NAVIGATION HANDLERS (Flow Logic) ---
+  // --- NAVIGATION LOGIC ---
 
-  // 1. Landing -> Unlock
   const handleStartJourney = () => {
     setCurrentSection('unlock');
   };
 
-  // 2. Unlock -> Cake (Password sahi hone par)
   const handleUnlock = () => {
     setIsUnlocked(true);
     setCurrentSection('cake');
   };
 
-  // 3. Cake -> Letter
   const handleCakeFinish = () => {
     setCurrentSection('letter');
   };
 
-  // 4. Letter -> Images (Naya Step)
   const handleLetterFinish = () => {
     setCurrentSection('images');
   };
 
-  // 5. Images -> Easter Eggs
   const handleImagesFinish = () => {
     setCurrentSection('eggs');
   };
 
-  // 6. Easter Eggs -> Promise
+  // ✅ YAHAN HAI LOGIC: Eggs complete hone par 'message' section par bhejega
   const handleEggsFinish = () => {
-    setCurrentSection('promise');
+    setCurrentSection('message');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cream via-beige to-warm-brown-light relative overflow-x-hidden">
-      {/* Background Hearts Animation */}
+      {/* Background Hearts */}
       {showHearts && <FloatingHearts />}
       
       <div className="relative z-10">
         
-        {/* STEP 1: LANDING */}
+        {/* 1. Landing */}
         {currentSection === 'landing' && (
           <LandingSection onOpenCapsule={handleStartJourney} />
         )}
 
-        {/* STEP 2: UNLOCK (Password) */}
+        {/* 2. Unlock */}
         {currentSection === 'unlock' && (
           <UnlockSection onUnlock={handleUnlock} />
         )}
 
-        {/* STEP 3: BIRTHDAY CAKE */}
+        {/* 3. Cake */}
         {currentSection === 'cake' && (
           <div className="min-h-screen flex flex-col items-center justify-center animate-fade-in pb-10">
              <BirthdayCake />
-             
-             {/* Next Button for Cake */}
              <button 
                onClick={handleCakeFinish}
                className="mt-4 flex items-center gap-2 px-8 py-3 bg-warm-brown text-white rounded-full 
@@ -88,22 +82,20 @@ function App() {
           </div>
         )}
         
-        {/* STEP 4: LETTER REVEAL */}
+        {/* 4. Letter */}
         {currentSection === 'letter' && (
           <LetterRevealSection onContinue={handleLetterFinish} />
         )}
 
-        {/* STEP 5: IMAGE SCROLL (NEW SECTION) */}
+        {/* 5. Images */}
         {currentSection === 'images' && (
-          <div className="min-h-screen flex flex-col items-center justify-center animate-fade-in ">
+          <div className="min-h-screen flex flex-col items-center justify-center animate-fade-in bg-[#FFF0F5]">
              <ImageScrollSection />
-             
-             {/* Next Button for Images */}
              <div className="pb-16 mt-8">
                <button 
                  onClick={handleImagesFinish}
-                 className="flex items-center gap-2 px-8 py-3 bg-warm-brown text-white rounded-full 
-                            font-playfair font-bold shadow-lg hover:bg-warm-brown-light 
+                 className="flex items-center gap-2 px-8 py-3 bg-[#9D5C6E] text-white rounded-full 
+                            font-playfair font-bold shadow-lg hover:bg-rose-700
                             transform hover:scale-105 transition-all duration-300"
                >
                  Go to Memories 💭 <ArrowRight size={20} />
@@ -112,12 +104,16 @@ function App() {
           </div>
         )}
         
-        {/* STEP 6: EASTER EGGS */}
+        {/* 6. Easter Eggs (Yahan button click hoga to handleEggsFinish chalega) */}
         {currentSection === 'eggs' && (
           <EasterEggsSection onContinue={handleEggsFinish} />
         )}
         
-       
+        {/* 7. Final Message (Overflowing with love...) */}
+        {currentSection === 'message' && (
+          <FinalMessageSection />
+        )}
+        
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, X, Sparkles } from 'lucide-react';
+import { Heart, X, Sparkles, ArrowRight } from 'lucide-react'; // ArrowRight add kiya hai
 
 interface EasterEggsSectionProps {
   onContinue: () => void;
@@ -152,7 +152,7 @@ const EasterEggsSection: React.FC<EasterEggsSectionProps> = ({ onContinue }) => 
         )}
 
         {/* --- PROGRESS & BUTTON --- */}
-        <div className="mt-8 w-full flex flex-col items-center">
+        <div className="mt-8 w-full flex flex-col items-center pb-12">
           
           {/* Progress Bar */}
           <div className="flex gap-2 mb-6">
@@ -166,7 +166,23 @@ const EasterEggsSection: React.FC<EasterEggsSectionProps> = ({ onContinue }) => 
             ))}
           </div>
 
-          {/* Continue Button */}
+          {/* Continue Button (Added Here) */}
+          <button
+            onClick={onContinue}
+            disabled={revealedEggs.length !== easterEggs.length}
+            className={`
+              px-10 py-4 rounded-full font-playfair font-bold text-lg shadow-xl transition-all duration-300 transform flex items-center gap-3
+              ${revealedEggs.length === easterEggs.length 
+                 ? 'bg-[#9D5C6E] text-white hover:bg-rose-800 hover:scale-105 animate-bounce cursor-pointer' 
+                 : 'bg-white text-gray-300 border-2 border-gray-100 cursor-not-allowed'}
+            `}
+          >
+            {revealedEggs.length === easterEggs.length ? (
+              <>Read Final Message 💌 <ArrowRight size={20} /></>
+            ) : (
+              "Find all 5 hearts first..."
+            )}
+          </button>
           
         </div>
 

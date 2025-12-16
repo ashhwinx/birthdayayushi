@@ -137,7 +137,7 @@ If you any day feel like ki milna hai mujhse I'll come....just text or call me. 
 
                   <div className="text-right mt-8">
                     <p className="font-dancing text-3xl text-warm-brown">
-                      Always yours,<br/>
+                      Yourr Friend???,<br/>
                       – Arushi 💌
                     </p>
                   </div>
